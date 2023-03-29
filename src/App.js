@@ -55,6 +55,16 @@ function App() {
     return daysWorked;
   };
 
+  function findLargestTime(obj) {
+    let largest = null;
+    Object.keys(obj).forEach((key) => {
+      if (largest === null || obj[key]["days"] > obj[largest]["days"]) {
+        largest = key;
+      }
+    });
+    return obj[largest];
+  }
+
   const handleFindPairs = () => {
     const projects = {};
     csvData.map((row, index) => {
@@ -85,7 +95,8 @@ function App() {
         });
       }
     });
-    setOutput(projects);
+    const largestObject = findLargestTime(projects);
+    setOutput(largestObject);
   };
 
   return (
